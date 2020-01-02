@@ -1,0 +1,39 @@
+package com.project.dm.loanorigination;
+
+import com.project.dm.loanorigination.Applicant;
+import com.project.dm.loanorigination.LoanApplication;
+import com.project.dm.loanorigination.service.BankruptcyDatabase;
+
+function boolean checkForBankruptcy(String uniqueID) {
+	//return com.project.dm.loanorigination.service.BankruptcyDataChecker.hasBankruptcyHistory(uniqueID);
+	if ( BankruptcyDatabase.containsId(uniqueID) ) {
+		return true;
+	}
+	return false;
+	
+}
+
+function void updateStatusAndRemarks(LoanApplication loanApplication){
+	
+	if (checkForBankruptcy(loanApplication.getApplicant().getUniqueId())){
+		loanApplication.setStatus("Rejected");
+		loanApplication.setRemarks("Rejected Because the Customer has Bankruptcy History");
+		loanApplication.getApplicant().setBlackListed(Boolean.TRUE);
+	}
+	else{
+		loanApplication.setStatus("Approved");
+		loanApplication.setRemarks("Approved");
+		loanApplication.getApplicant().setBlackListed(Boolean.FALSE);
+	}
+	
+} 
+
+rule "BlackListVerification"
+	
+	when
+		$loanApplication : LoanApplication()
+	then
+		System.out.println("Inside the Black List Verification");
+		System.out.println($loanApplication.getApplicant().getName());
+		updateStatusAndRemarks ($loanApplication);
+end

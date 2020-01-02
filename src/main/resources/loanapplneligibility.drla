@@ -1,0 +1,12 @@
+//created on: 29 Dec, 2019
+package com.project.dm.loanorigination
+import com.myspace.loanorigination.Person;
+
+rule "LoanApplicationEligibility"
+when
+    $person : Person ( age > 21)
+then
+    $person.setEligibleToApplyLoan(true);
+    System.out.println("Eligible to apply loan...");
+end
+
