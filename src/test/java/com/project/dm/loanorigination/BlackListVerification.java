@@ -1,18 +1,3 @@
-/*
- * Copyright 2015 Red Hat, Inc. and/or its affiliates.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
-*/
-
 package com.project.dm.loanorigination;
 
 import static org.junit.Assert.assertEquals;
@@ -99,39 +84,12 @@ public class BlackListVerification {
 
         // Fire all rules:
         session.fireAllRules();
-        
-        
         System.out.println("Rule Executed.....Application Status:"+loanApplication.getStatus());
         System.out.println("CreditScore: "+ applicant.getCreditScore());
         System.out.println("Remarks:"+loanApplication.getRemarks());
-
-        
-        
-        
+      
         session.dispose();
         
-        
-        
-        
-
-//        Measurement mRed= new Measurement("color", "red");
-//        session.insert(mRed);
-//        session.fireAllRules();
-//
-//        Measurement mGreen= new Measurement("color", "green");
-//        session.insert(mGreen);
-//        session.fireAllRules();
-//
-//        Measurement mBlue= new Measurement("color", "blue");
-//        session.insert(mBlue);
-//        session.fireAllRules();
-//
-//        LOG.info("Final checks");
-//
-//        assertEquals("Size of object in Working Memory is 3", 3, session.getObjects().size());
-//        assertTrue("contains red", check.contains("red"));
-//        assertTrue("contains green", check.contains("green"));
-//        assertTrue("contains blue", check.contains("blue"));
-
+  
     }
 }
